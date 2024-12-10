@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main (){
-  runApp(MaterialApp(home: custom_containar()));
-}
-
 class custom_containar extends StatelessWidget {
   const custom_containar({
     super.key,
@@ -21,7 +17,7 @@ class custom_containar extends StatelessWidget {
             bottomRight: Radius.circular(50),
           ),
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 127, 68, 255), Colors.lightBlueAccent],
+            colors: [Color.fromARGB(255, 74, 39, 148), Color.fromARGB(255, 30, 65, 192)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),

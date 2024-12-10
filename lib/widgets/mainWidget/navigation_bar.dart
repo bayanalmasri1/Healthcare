@@ -38,7 +38,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 _buildNavItem(Icons.home, 0, "Home"),
                 _buildNavItem(Icons.search, 1, "Search"),
                 _buildNavItem(Icons.favorite, 2, "Favorites"),
-                _buildNavItem(Icons.person, 3, "Profile"),
+                _buildNavItem(Icons.settings, 3, "Setting"),
               ],
             ),
           ),
@@ -56,14 +56,14 @@ class CustomBottomNavBar extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: currentIndex == index ? Colors.blue : Colors.grey,
+            color: currentIndex == index ? Colors.blue : Colors.white,
             size: 28,
           ),
           Text(
             label,
             style: TextStyle(
               fontSize: 12,
-              color: currentIndex == index ? Colors.blue : Colors.grey,
+              color: currentIndex == index ? Colors.blue : Colors.white,
             ),
           ),
         ],

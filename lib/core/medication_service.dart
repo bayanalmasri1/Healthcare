@@ -3,7 +3,7 @@ import 'package:new_healthapp/model/Midication_list.dart';
 
 class MedicationService {
   final CollectionReference _medicationCollection =
-      FirebaseFirestore.instance.collection('medications');
+      FirebaseFirestore.instance.collection('Medicines_List');
 
   // جلب بيانات الأدوية باستخدام Future
   Future<List<Medication>> getMedications() async {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:new_healthapp/model/icon_items.dart';
+import 'package:new_healthapp/screens/settings_screen.dart';
 import 'package:new_healthapp/widgets/mainWidget/navigation_bar.dart';
 import 'package:new_healthapp/widgets/patientWidget/Activemidication.dart';
-import 'package:new_healthapp/widgets/patientWidget/costum_container.dart';
-import 'package:new_healthapp/widgets/patientWidget/icon_containar.dart';
+import 'package:new_healthapp/widgets/mainWidget/costum_container.dart';
+import 'package:new_healthapp/widgets/mainWidget/icon_containar.dart';
 import 'package:new_healthapp/widgets/patientWidget/infowidget.dart';
 
 class PatientScreen extends StatefulWidget {
@@ -18,7 +20,7 @@ class _PatientScreenState extends State<PatientScreen> {
     HomeSection(),
     SearchSection(),
     FavoritesSection(),
-    ProfileSection(),
+    SettingsPage(),
   ];
 
   @override
@@ -42,27 +44,38 @@ class HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: SafeArea(
-        bottom: false,
-        child: Expanded(
-          child: Column(
-            children: [
-              Stack(children: [
-                custom_containar(),
-                 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 140,bottom: 0),
-                    child: container_Icons(),
-                  ),
-                ]),
-                Info_widgets(),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ActiveMedicinesWidget(),
-                )
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(children: [
+            custom_containar(),
+            Padding(
+              padding: const EdgeInsets.only(left: 9,top: 150),
+              child: CustomGrid(
+                items: PatintItems,
+                imageSize: 50.0,
+                fontSize: 14.0,
+                onTap: (item) {
+                  if (item['route'] != null && item['route']!.isNotEmpty) {
+                    Navigator.pushNamed(context, item['route']);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${item['title']} clicked!')),
+                    );
+                  }
+                },
+              ),
+            ),
+          ]), // العنصر العلوي
+
+          //   const SizedBox(height: .0), // مسافة بين الشبكة والمعلومات
+          const Info_widgets(), // عنصر معلومات المرضى
+          const SizedBox(height: 16.0), // مسافة
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: ActiveMedicinesWidget(), // عنصر الأدوية النشطة
           ),
-        ),
+        ],
       ),
     );
   }
@@ -71,7 +84,7 @@ class HomeSection extends StatelessWidget {
 class SearchSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Search Section',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -83,21 +96,9 @@ class SearchSection extends StatelessWidget {
 class FavoritesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'Favorites Section',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class ProfileSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Profile Section',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
