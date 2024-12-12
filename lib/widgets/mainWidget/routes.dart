@@ -30,6 +30,7 @@ import 'package:new_healthapp/Features/patient/midecalrecord/raidlogyreports.dar
 import 'package:new_healthapp/Features/settings/about_us.dart';
 import 'package:new_healthapp/Features/settings/helpandsupport.dart';
 import 'package:new_healthapp/Features/settings/ouransdpartner.dart';
+import 'package:new_healthapp/Features/settings/privicy.dart';
 import 'package:new_healthapp/Features/settings/terms.dart';
 import 'package:new_healthapp/screens/doctor_screen.dart';
 import 'package:new_healthapp/screens/login_screen.dart';
@@ -74,6 +75,8 @@ class AppRoutes {
     GetPage(name: "/AboutUsScreen", page: ()=>AboutUsScreen()),
     GetPage(name: "/HelpSupportScreen", page: ()=>HelpSupportScreen()),
     GetPage(name: "/PartnersScreen ", page: ()=>PartnersScreen()),
-    GetPage(name: "/ TermsOfServiceScreen", page: ()=> TermsOfServiceScreen())
+    GetPage(name: "/TermsOfServiceScreen", page: ()=> TermsOfServiceScreen()),
+    GetPage(name: "/PrivacyPolicyScreen", page: ()=>PrivacyPolicyScreen()),
+  
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_healthapp/widgets/mainWidget/custom_appbar.dart';
@@ -26,13 +27,17 @@ class SettingsPage extends StatelessWidget {
               context,
               icon: Icons.privacy_tip,
               title: 'Privacy Policy',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/PrivacyPolicyScreen");
+              },
             ),
             _buildListTile(
               context,
               icon: Icons.article,
               title: 'Terms of Service',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/TermsOfServiceScreen");
+              },
             ),
             SwitchListTile(
               value: true,
@@ -57,7 +62,41 @@ class SettingsPage extends StatelessWidget {
               context,
               icon: Icons.logout,
               title: 'Sign Out',
-              onTap: () {},
+              onTap: () async {
+                bool confirm = await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Confirm Sign Out"),
+                      content: Text("Are you sure you want to sign out?"),
+                      actions: [
+                        TextButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                        ),
+                        TextButton(
+                          child: Text("Sign Out"),
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+                if (confirm) {
+                  try {
+                    await FirebaseAuth.instance.signOut();
+                    Get.offAllNamed("/");
+                  } catch (e) {
+                    Get.snackbar(
+                        'Error', 'Failed to sign out. Please try again.',
+                        snackPosition: SnackPosition.BOTTOM);
+                  }
+                }
+              },
             ),
           ],
         ),
