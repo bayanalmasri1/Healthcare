@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ConfirmAppointmentPage extends StatelessWidget {
+  // دالة للتحقق من الاتصال بالإنترنت
+  Future<bool> isConnected() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult != ConnectivityResult.none;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,25 +45,38 @@ class ConfirmAppointmentPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  final appointmentDetails = {
-                    'hospital': 'Jordan Hospital',
-                    'location': 'Shmeisani',
-                    'service': 'General Care',
-                    'doctor': 'Dr. Mahmud Jarwan',
-                    'date': '23-10-2024',
-                    'time': '8:00 AM - 9:00 AM',
-                    'patient': 'Ahmed Khaled',
-                    'status': 'pending', // Default status
-                  };
+                  bool connected = await isConnected();
+                  if (connected) {
+                    // عرض مؤشر تحميل أثناء الإرسال
+                    showDialog(
+                      context: context,
+                      builder: (context) => Center(child: CircularProgressIndicator()),
+                    );
 
-                  try {
-                    await FirebaseFirestore.instance
-                        .collection('accept_appointment')
-                        .add(appointmentDetails);
-                    Get.offAllNamed("/Login", arguments: appointmentDetails);
-                  } catch (e) {
+                    final appointmentDetails = {
+                      'hospital': 'Jordan Hospital',
+                      'location': 'Shmeisani',
+                      'service': 'General Care',
+                      'doctor': 'Dr. Mahmud Jarwan',
+                      'date': '23-10-2024',
+                      'time': '8:00 AM - 9:00 AM',
+                      'patient': 'Ahmed Khaled',
+                      'status': 'pending', // Default status
+                    };
+
+                    try {
+                      await FirebaseFirestore.instance.collection('accept_appointment').add(appointmentDetails);
+                      Navigator.pop(context); // إغلاق مؤشر التحميل
+                      Get.offAllNamed("/Login", arguments: appointmentDetails);
+                    } catch (e) {
+                      Navigator.pop(context); // إغلاق مؤشر التحميل
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Failed to send appointment: $e')),
+                      );
+                    }
+                  } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Failed to send appointment: $e')),
+                      SnackBar(content: Text('No internet connection')),
                     );
                   }
                 },

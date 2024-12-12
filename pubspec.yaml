@@ -46,6 +46,7 @@ dependencies:
   flutter_facebook_auth: ^7.1.1
   intl: ^0.20.1
   flutter_masked_text2: ^0.9.1
+  connectivity_plus: ^6.1.0
 
 dev_dependencies:
   flutter_test:
