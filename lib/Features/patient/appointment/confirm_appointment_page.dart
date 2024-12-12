@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConfirmAppointmentPage extends StatelessWidget {
   @override
@@ -10,7 +12,7 @@ class ConfirmAppointmentPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
               'https://via.placeholder.com/300x150', // Replace with actual image
@@ -19,7 +21,7 @@ class ConfirmAppointmentPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             SizedBox(height: 16.0),
-            Text(
+            const Text(
               'Jordan Hospital',
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
@@ -35,8 +37,28 @@ class ConfirmAppointmentPage extends StatelessWidget {
             Spacer(),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  // Action to finalize booking
+                onPressed: () async {
+                  final appointmentDetails = {
+                    'hospital': 'Jordan Hospital',
+                    'location': 'Shmeisani',
+                    'service': 'General Care',
+                    'doctor': 'Dr. Mahmud Jarwan',
+                    'date': '23-10-2024',
+                    'time': '8:00 AM - 9:00 AM',
+                    'patient': 'Ahmed Khaled',
+                    'status': 'pending', // Default status
+                  };
+
+                  try {
+                    await FirebaseFirestore.instance
+                        .collection('accept_appointment')
+                        .add(appointmentDetails);
+                    Get.offAllNamed("/Login", arguments: appointmentDetails);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Failed to send appointment: $e')),
+                    );
+                  }
                 },
                 child: Text('Finalize Appointment'),
               ),

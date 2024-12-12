@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_healthapp/constant.dart';
 import 'package:new_healthapp/widgets/mainWidget/routes.dart';
 
 void main() async {
@@ -14,7 +13,7 @@ void main() async {
           storageBucket: "healthcare-app-13489.firebasestorage.app",
           messagingSenderId: "571185554533",
           appId: "1:571185554533:web:40e8b9e0c83686c05a528c"));
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,9 +26,6 @@ class MyApp extends StatelessWidget {
       title: 'Health Care',
       initialRoute: AppRoutes.initial,
       getPages: AppRoutes.routes,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.system,
     );
   }
 }

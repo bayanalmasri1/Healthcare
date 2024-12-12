@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_healthapp/widgets/mainWidget/custom_appbar.dart';
 
 class ServiceCostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Service Cost Estimation'),
+      appBar: CustomAppBar(
+        title: 'Service Cost Estimation',
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Service Details',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16.0),
-            ServiceDetailRow(label: 'Doctor\'s Fee', amount: 'JOD 50'),
-            ServiceDetailRow(label: 'Service Charge', amount: 'JOD 30'),
-            Divider(thickness: 1.0),
-            ServiceDetailRow(
-              label: 'Total Amount',
-              amount: 'JOD 80',
-              isBold: true,
-            ),
-            SizedBox(height: 32.0),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                 Get.toNamed("/ConfirmAppointmentPage");
-                },
-                child: Text('Confirm'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Service Details',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              SizedBox(height: 16.0),
+              ServiceDetailRow(label: 'Doctor\'s Fee', amount: 'JOD 50'),
+              ServiceDetailRow(label: 'Service Charge', amount: 'JOD 30'),
+              Divider(thickness: 1.0),
+              ServiceDetailRow(
+                label: 'Total Amount',
+                amount: 'JOD 80',
+                isBold: true,
+              ),
+              SizedBox(height: 32.0),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                   Get.toNamed("/ConfirmAppointmentPage");
+                  },
+                  child: Text('Confirm'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

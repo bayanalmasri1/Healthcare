@@ -14,7 +14,6 @@ class StartScreen extends StatelessWidget {
         children: [
           Stack(
             children: [
-          
               Container(
                 height: 300,
                 padding: const EdgeInsets.all(16.0),
@@ -33,32 +32,37 @@ class StartScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                top: 100,
-                left: 16,right: 16,
-                child: Image.asset("assets/images/logo.png")),
-                const Center(
-                  child:  Positioned(
-                    top: 110,
-                    child: Text(
-                            "Healthy Guard",
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+              Padding(
+                padding: const EdgeInsets.only(top: 65),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Image.asset("assets/images/logo.png"),
+                      const Text(
+                    "Healthy Guard",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                    ],
                   ),
                 ),
+              ),
+              
             ],
           ),
-          const SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: CustomButton(
                 text: "Doctors",
                 onPressed: () {
-                  Get.toNamed("/DoctorScreen");
+                  Get.toNamed("/LoginDoctorPage");
                 }),
           ),
           Padding(
@@ -69,7 +73,7 @@ class StartScreen extends StatelessWidget {
                   Get.toNamed("/login");
                 }),
           ),
-          IconButton(onPressed: (){}, icon:Icon (Icons.help))
+      
         ],
       ),
     );

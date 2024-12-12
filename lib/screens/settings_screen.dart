@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_healthapp/widgets/mainWidget/custom_appbar.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -17,7 +18,9 @@ class SettingsPage extends StatelessWidget {
               context,
               icon: Icons.info,
               title: 'About Us',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/AboutUsScreen");
+              },
             ),
             _buildListTile(
               context,
@@ -46,7 +49,9 @@ class SettingsPage extends StatelessWidget {
               context,
               icon: Icons.help,
               title: 'Help & Support',
-              onTap: () {},
+              onTap: () {
+                Get.toNamed("/HelpSupportScreen");
+              },
             ),
             _buildListTile(
               context,

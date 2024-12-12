@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:navbar_router/navbar_router.dart';
 import 'package:new_healthapp/core/auth_service.dart';
 import 'package:new_healthapp/widgets/mainWidget/custom_button.dart';
 
@@ -29,31 +30,19 @@ class Align_login extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                      fontSize: 32, // حجم النص
-                      fontWeight: FontWeight.bold,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'Wel', // الجزء الأول
-                        style: TextStyle(
-                            color: Colors.purple), // اللون الأول
-                      ),
-                      TextSpan(
-                        text: 'come', // الجزء الثاني
-                        style:
-                            TextStyle(color: Colors.blue), // اللون الثاني
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+             const Center(
+                  child: Text(
+                "Welcome",
+                style: TextStyle(
+                    color: Colors.purple,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w400),
+              )),
               SizedBox(height: 20),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
+                  
                   labelText: 'National ID Number',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -62,6 +51,7 @@ class Align_login extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextFormField(
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(
@@ -88,32 +78,6 @@ class Align_login extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.facebook, color: Colors.blue),
-                    onPressed: () async {
-                      final user =
-                          await _authService.signInWithFacebook();
-                      if (user != null) {
-                        print(
-                            'Logged in with Facebook: ${user.displayName}');
-                      }
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.g_mobiledata, color: Colors.red),
-                    onPressed: () async {
-                      final user = await _authService.signInWithGoogle();
-                      if (user != null) {
-                        print(
-                            'Logged in with Google: ${user.displayName}');
-                      }
-                    },
-                  ),
-                ],
-              ),
             ],
           ),
         ),

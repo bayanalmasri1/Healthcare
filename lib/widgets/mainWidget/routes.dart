@@ -5,7 +5,6 @@ import 'package:new_healthapp/Features/Doctors/HistoryPage.dart';
 import 'package:new_healthapp/Features/Doctors/Mony.dart';
 import 'package:new_healthapp/Features/Doctors/Myinfo.dart';
 import 'package:new_healthapp/Features/Doctors/PatientCenter.dart';
-import 'package:new_healthapp/Features/Doctors/RegistarDoctor.dart';
 import 'package:new_healthapp/Features/Doctors/doctor_hospital.dart';
 import 'package:new_healthapp/Features/Doctors/hospitaldetails.dart';
 import 'package:new_healthapp/Features/Doctors/login_Doctor.dart';
@@ -28,6 +27,10 @@ import 'package:new_healthapp/Features/patient/midecalrecord/labreports.dart';
 import 'package:new_healthapp/Features/patient/midecalrecord/midecalrecord_screen.dart';
 import 'package:new_healthapp/Features/patient/midecalrecord/personal_info.dart';
 import 'package:new_healthapp/Features/patient/midecalrecord/raidlogyreports.dart';
+import 'package:new_healthapp/Features/settings/about_us.dart';
+import 'package:new_healthapp/Features/settings/helpandsupport.dart';
+import 'package:new_healthapp/Features/settings/ouransdpartner.dart';
+import 'package:new_healthapp/Features/settings/terms.dart';
 import 'package:new_healthapp/screens/doctor_screen.dart';
 import 'package:new_healthapp/screens/login_screen.dart';
 import 'package:new_healthapp/screens/patient_screen.dart';
@@ -39,7 +42,6 @@ class AppRoutes {
     GetPage(name: "/", page: () => StartScreen()),
     GetPage(name: "/login", page: () => LoginScreen()),
     GetPage(name: "/LoginDoctorPage", page: ()=>LoginDoctorPage()),
-    GetPage(name: "/RegisterDoctorPage", page: ()=>RegisterDoctorPage()),
     GetPage(name: "/patient", page: () => PatientScreen()),
     GetPage(name: "/insurance", page: () => InsuranceCenterScreen()),
     GetPage(name: "/appointment", page: () => const Appointment()),
@@ -62,12 +64,16 @@ class AppRoutes {
     GetPage(name: "/HospitalListScreen", page: () => HospitalListScreen()),
     GetPage(name: "/DoctorScreen", page: () => DoctorScreen()),
     GetPage(name: "/HospitalsDoctor", page: ()=>  Hospitals_Doctor_Page()),
-    GetPage(name: "/AcceptedAppointment", page: () => AcceptedAppointmentsPage()),
+    GetPage(name: "/AcceptedAppointment", page: () =>AcceptedAppointmentScreen(appointmentId: '', data: {},)),
     GetPage(name: "/DoctorsPortalPage", page: () => DoctorsPortalPage()),
     GetPage(name: "/PatientCenterPage", page: ()=>PatientCenterPage()),
     GetPage(name: "/HistoryDoctorPage", page: ()=> HistoryDoctorPage()),
     GetPage(name: "/FacilityDetailScreen", page: ()=>FacilityDetailScreen()),
     GetPage(name: "/InfoDoctorScreen", page: ()=>InfoDoctorScreen()),
-    GetPage(name: "/DoctorMoneyScreen", page: ()=> DoctorMoneyScreen())
+    GetPage(name: "/DoctorMoneyScreen", page: ()=> DoctorMoneyScreen()),
+    GetPage(name: "/AboutUsScreen", page: ()=>AboutUsScreen()),
+    GetPage(name: "/HelpSupportScreen", page: ()=>HelpSupportScreen()),
+    GetPage(name: "/PartnersScreen ", page: ()=>PartnersScreen()),
+    GetPage(name: "/ TermsOfServiceScreen", page: ()=> TermsOfServiceScreen())
   ];
 }

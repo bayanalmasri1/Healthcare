@@ -10,12 +10,14 @@ class AuthService {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     if (googleUser != null) {
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       return userCredential.user;
     }
     return null;
@@ -26,22 +28,28 @@ class AuthService {
     final LoginResult result = await FacebookAuth.instance.login();
     if (result.status == LoginStatus.success) {
       final AccessToken accessToken = result.accessToken!;
-      final AuthCredential credential = FacebookAuthProvider.credential(accessToken.tokenString);
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final AuthCredential credential =
+          FacebookAuthProvider.credential(accessToken.tokenString);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       return userCredential.user;
     }
     return null;
   }
 
   // تسجيل الدخول باستخدام البريد الإلكتروني وكلمة المرور
-  Future<User?> signInWithEmailPassword(String email, String password) async {
+  Future<void> loginUser(String email, String password) async {
     try {
-      final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return userCredential.user;
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      print("User logged in: ${userCredential.user?.email}");
+      // يمكنك هنا تحويل المستخدم إلى الصفحة الرئيسية
     } catch (e) {
-      print(e);
+      print("Login failed: $e");
+      // هنا يمكن إضافة رسالة خطأ للمستخدم
     }
-    return null;
   }
 }
